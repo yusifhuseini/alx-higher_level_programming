@@ -1,0 +1,55 @@
+========================
+ How to Use 1-my_list.py
+========================
+
+This library show usage of ``MyList``.
+
+Lists
+=====
+
+``MyList`` inherits the object List.
+
+::
+	>>> MyList = __import__('1-my_list').MyList
+	>>> new_list = MyList()
+	>>> new_list
+	[]
+	>>> new_list.print_sorted()
+	[]
+	>>> new_list.append(1)
+	>>> print(new_list)
+	[1]
+	>>> new_list.append(4)
+	>>> new_list.append(2)
+	>>> new_list.append(3)
+	>>> new_list.append(5)
+	>>> print(new_list)
+	[1, 4, 2, 3, 5]
+	>>> new_list.print_sorted()
+	[1, 2, 3, 4, 5]
+	>>> print(new_list)
+	[1, 4, 2, 3, 5]
+	>>> new_list is new_list.print_sorted()
+	[1, 2, 3, 4, 5]
+	False
+
+::
+
+	>>> new_list.clear()
+	>>> print(new_list)
+	[]
+	>>> new_list += [1, 4]
+	>>> print(new_list)
+	[1, 4]
+	>>> new_list.pop()
+	4
+	>>> new_list.append(3)
+	>>> new_list.reverse()
+	>>> print(new_list)
+	[3, 1]
+
+	>>> new_list.append("gg")
+	>>> new_list.print_sorted()
+	Traceback (most recent call last):
+		...
+	TypeError: '<' not supported between instances of 'str' and 'int'
