@@ -5,30 +5,30 @@ A script that creates the State “California”
 with the City “San Francisco” from the database hbtn_0e_100_usa
 """
 
-from sys import argv
-from sqlalchemy.engine import Engine
-from relationship_city import City
-from relationship_state import Base, State
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session
+from relationship_state import Base, State
+from relationship_city import City
+from sys import argv
 
 
-def createSession(args: list) -> Session:
-    """Create a MySQL database session
-    Args:
-        args (list): List of arguments passed to the script
+def create_state_city():
     """
-    engine: Engine = create_engine(
-        'mysql+mysqldb://{}:{}@localhost/{}'.format(args[0], args[1], args[2]),
-        pool_pre_ping=True
-    )
+    Creates the State “California” with the City “San Francisco” in the database hbtn_0e_100_usa
+    """
+    username, password, db_name = argv[1], argv[2], argv[3]
+    engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:3306/{db_name}")
+
     Base.metadata.create_all(engine)
-    Session: Session = sessionmaker(bind=engine)
-    return Session()
 
+    session = Session(engine)
 
-if __name__ == '__main__':
-    session: Session = createSession(argv[1:])
-    session.add(City(name='San Francisco', state=State(name='California')))
+    new_state = State(name="California", cities=[City(name="San Francisco")])
+    session.add(new_state)
     session.commit()
+
     session.close()
+
+
+if __name__ == "__main__":
+    create_state_city()

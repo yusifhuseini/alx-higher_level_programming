@@ -3,12 +3,12 @@
 """
 A script that defines model via SQLAlchemy ORM
 """
+from typing import Any, Union
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 
-Base: declarative_base = declarative_base()
-
+Base: Any = declarative_base()
 
 class State(Base):
     """Defines a state model
@@ -17,10 +17,8 @@ class State(Base):
         name (String): Name of state
         cities (City): List of City instances associated with this state
     """
-    __tablename__: str = 'states'
-    id: Column = Column(Integer, primary_key=True, nullable=False)
-    name: Column = Column(String(128), nullable=False)
-
-    cities: relationship = relationship(
-        "City", backref="state", cascade="all, delete"
-    )
+    __tablename__ = 'states'
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", back_populates="state",
+cascade="all, delete-orphan")
