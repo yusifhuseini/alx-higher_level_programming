@@ -20,9 +20,5 @@ def print_content_info(content):
 
 if __name__ == '__main__':
     url = 'https://alx-intranet.hbtn.io/status'
-    
-    # Fetch URL content
-    page_content = fetch_url_content(url)
-    
-    # Print information about the content
-    print_content_info(page_content)
+    page_content = fetch_url_content(url) # Fetch URL content
+    print_content_info(page_content) # Print info about the content
